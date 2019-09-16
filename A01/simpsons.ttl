@@ -1,0 +1,130 @@
+# EDSON YUDI TOMA - 9791305 #
+
+
+# 1 Exercise 
+# Define the standard rdf and xsd namespaces, and the foaf, fam and sim namespaces as specified above in your RDF file. 
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix fam: <http://www.ifi.uio.no/INF3580/family#>.
+@prefix sim: <http://www.ifi.uio.no/INF3580/simpsons#>.
+
+
+# 2 Exercise 
+# Add Homer, Marge, Lisa, Bart and Maggie as instances of foaf:Person to your RDF file. Add also their full name, e.g. "Homer Simpson", using the foaf:name property and their age using the foaf:age property. Take values from the table below. Specify the age values to be of the datatype xsd:int. 
+# Person Age 
+# Homer Simpson 36
+# Marge Simpson 34
+# Lisa Simpson 8 
+# Bart Simpson 10 
+# Maggie Simpson 1 
+
+# Homer #
+sim:Homer rdf:type foaf:Person .
+sim:Homer foaf:name "Homer Simpson" .
+sim:Homer foaf:age "36"^^xsd:integer .
+
+# Marge #
+sim:Marge rdf:type foaf:Person .
+sim:Marge foaf:name "Marge Simpson" .
+sim:Marge foaf:age "34"^^xsd:integer .
+
+# Lisa #
+sim:Lisa rdf:type foaf:Person .
+sim:Lisa foaf:name "Lisa Simpson" .
+sim:Lisa foaf:age "8"^^xsd:integer .
+
+# Bart #
+sim:Bart rdf:type foaf:Person .
+sim:Bart foaf:name "Bart Simpson" .
+sim:Bart foaf:age "10"^^xsd:integer .
+
+# Maggie #
+sim:Maggie rdf:type foaf:Person .
+sim:Maggie foaf:name "Maggie Simpson" .
+sim:Maggie foaf:age "1"^^xsd:integer .
+
+
+# 3 Exercise 
+# Model the statement: 
+# * The Simpsons is a family, 
+# * Members of the family are Marge, Homer, Bart, Lisa and Maggie.
+# * Marge and Homer are married, i.e, Marge is the spouse of Homer and Homer is the spouse of Marge.
+# * They are respectively the mother and father to Bart, Lisa and Maggie.
+# Create a suitable identifier for the Simpsons family. 
+
+# Family #
+sim:TheSimpsons rdf:type fam:Family .
+
+# Family members #
+sim:TheSimpsons fam:hasFamilyMember sim:Homer .
+sim:TheSimpsons fam:hasFamilyMember sim:Marge .
+sim:TheSimpsons fam:hasFamilyMember sim:Lisa .
+sim:TheSimpsons fam:hasFamilyMember sim:Bart .
+sim:TheSimpsons fam:hasFamilyMember sim:Maggie .
+
+# Marriage #
+sim:Homer fam:hasSpouse sim:Marge .
+sim:Marge fam:hasSpouse sim:Homer .
+
+# Parents - child #
+sim:Homer fam:hasChild sim:Lisa .
+sim:Homer fam:hasChild sim:Bart .
+sim:Homer fam:hasChild sim:Maggie .
+sim:Marge fam:hasChild sim:Lisa .
+sim:Marge fam:hasChild sim:Bart .
+sim:Marge fam:hasChild sim:Maggie .
+sim:Lisa fam:hasFather sim:Homer .
+sim:Lisa fam:hasMother sim:Marge .
+sim:Bart fam:hasFather sim:Homer .
+sim:Bart fam:hasMother sim:Marge .
+sim:Maggie fam:hasFather sim:Homer .
+sim:Maggie fam:hasMother sim:Marge .
+
+# Brothers and Sisters #
+sim:Lisa fam:hasBrother sim:Bart .
+sim:Lisa fam:hasSister sim:Maggie .
+sim:Bart fam:hasSister sim:Lisa .
+sim:Bart fam:hasSister sim:Maggie .
+sim:Maggie fam:hasSister sim:Lisa .
+sim:Maggie fam:hasBrother sim:Bart .
+
+
+# 4 Exercise 
+# Model the statement: "Maggie has the grandfather Abraham and the grandmother Mona." 
+# Tip: You do not know which of the grandparents is parent to which of Maggie’s parents (since you only know what these exercises tell you).
+# To express the relationship between Maggie and her grandparents, you’ll need to use blank nodes. 
+
+# Grandparents #
+sim:Abraham rdf:type foaf:Person .
+sim:Mona rdf:type foaf:Person .
+
+# Relations to Maggie #
+sim:Maggie fam:hasParent [ fam:hasFather sim:Abraham ] .
+sim:Maggie fam:hasParent [ fam:hasMother sim:Mona ] .
+
+
+#5 Exercise 
+#Model the statement: "Lisa has the aunts Patty and Selma and the uncle Herb. Patty and Selma are sisters." 
+
+# Aunts and uncle #
+sim:Patty rdf:type foaf:Person .
+sim:Selma rdf:type foaf:Person .
+sim:Herb rdf:type foaf:Person .
+
+# Sisters #
+sim:Patty fam:hasSister sim:Selma .
+sim:Selma fam:hasSister sim:Patty .
+
+# Relations to Lisa #
+sim:Lisa fam:hasParent [ fam:hasSister sim:Patty ] .
+sim:Lisa fam:hasParent [ fam:hasSister sim:Selma ] .
+sim:Lisa fam:hasParent [ fam:hasBrother sim:Herb ] .
+
+
+# 6 Exercise 
+# Model the statement: "Marge has a father-in-law Abraham."
+
+# sim:Marge fam:hasSpouse [ fam:hasParent sim:Abraham ] .
+sim:Marge fam:hasSpouse [ fam:hasFather sim:Abraham ] .
