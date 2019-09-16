@@ -1,0 +1,7 @@
+# File containing the prefixes as specified in the exercise text. #
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix fam: <http://www.ifi.uio.no/INF3580/family#>.
+@prefix sim: <http://www.ifi.uio.no/INF3580/simpsons#>.
