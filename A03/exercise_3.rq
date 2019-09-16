@@ -1,0 +1,17 @@
+# EDSON YUDI TOMA - 9791305 #
+# Exercise 3 #
+# Find everyone with a name with ’M’ as first letter. Result variable name: ?person. #
+
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX sim: <http://www.ifi.uio.no/INF3580/simpsons#>
+PREFIX fam: <http://www.ifi.uio.no/INF3580/family#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?person WHERE {
+    {?person rdf:type foaf:person .}
+    UNION {
+        ?person foaf:name ?name .
+        FILTER regex(?name, "M.*") .
+    }
+}

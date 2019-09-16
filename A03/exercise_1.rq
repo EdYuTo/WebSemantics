@@ -1,0 +1,16 @@
+# EDSON YUDI TOMA - 9791305 #
+# Exercise 1 #
+# Find all Persons and order them by identifier, list also optionally their name. Use the result variable names ?person, ?name. #
+
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX sim: <http://www.ifi.uio.no/INF3580/simpsons#>
+PREFIX fam: <http://www.ifi.uio.no/INF3580/family#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT  ?person ?name WHERE  {
+    ?person rdf:type foaf:Person .
+    OPTIONAL {
+        ?person foaf:name ?name .
+    }
+} ORDER BY ?person
